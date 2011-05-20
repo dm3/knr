@@ -8,9 +8,8 @@ main() {
      */
     int c;
 
-    c = getchar();
-    while (c != EOF) {
+    // the value of an expression in C is equal to its lvalue
+    while ((c = getchar()) != EOF) {
         putchar(c);
-        c = getchar();
     }
 }
