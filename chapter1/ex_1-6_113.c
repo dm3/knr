@@ -37,14 +37,20 @@ void print_histogram(int word_counts[], int sz) {
     int b = 1, e = sz; // beginning and end row indexes
 
     // set the beginning to the index of the first non-zero count
-    while (word_counts[b] == 0)
+    while (word_counts[b] == 0 && b < sz)
         b++;
     // set the ending to the index of the last non-zero count
-    while (word_counts[e] == 0)
+    while (word_counts[e] == 0 && e >= 0)
         e--;
 
     e++; // ending points to the last zero count (so that it would be exclusive)
     int rows = e - b;
+
+    if (rows <= 0) {
+        printf("No data found!\n");
+        return;
+    }
+
     float row_lengths[rows];
     normalize_row_lengths(word_counts, row_lengths, b, e);
 
@@ -85,7 +91,7 @@ void init_zeroes(int arr[], int len) {
  *
  * 4 x 3-char words
  * 2 x 4-char words
- * 2 x 5-char words
+ * 3 x 5-char words
  *
  * the output should look like this:
  *
@@ -100,7 +106,7 @@ int main() {
     int word_counts[MAX_WORD_LENGTH + 1], c;
     int current_word_len = 0, state = OUT;
 
-    init_zeroes(word_counts, MAX_WORD_LENGTH);
+    init_zeroes(word_counts, MAX_WORD_LENGTH + 1);
 
     while ((c = getchar()) != EOF) {
         if (non_word(c) == TRUE) {
