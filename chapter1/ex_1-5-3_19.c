@@ -4,7 +4,7 @@
 #define FALSE 0
 
 main() {
-    int c, last_char_blank;
+    int c, last_char_blank = FALSE;
 
     while ((c = getchar()) != EOF) {
         if (c == ' ' && last_char_blank == TRUE) {
