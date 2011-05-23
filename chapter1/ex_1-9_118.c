@@ -8,7 +8,8 @@ int is_blank(int c);
 
 /**
  * Trims the input lines of trailing blanks and newlines and prints lines along
- * with their lengths.
+ * with their lengths. Maximum size of a line is hardcoded (which is probably
+ * against the spec of the exercise)!
  */
 int main() {
     char line[MAXLINE];
