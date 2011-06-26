@@ -5,7 +5,13 @@ tests="$root/test"
 src="$root/chapter1"
 target="$root/target"
 
-# preconditions:
+# -- preconditions
+# exercise number
+if [[ -z $1 ]]; then
+    echo "First argument should be the number of the exercise (like 1.1 or 2.12)."
+    exit 1
+fi
+
 # target directory
 if [[ -d "$target" ]]; then
     rm -rf "$target"
@@ -17,21 +23,30 @@ else
     echo "Failed to create $target dir for compiled files."
 fi
 
-# exercise number
-if [[ -z $1 ]]; then
-    echo "First argument should be the number of the exercise (like 1.1 or 2.12)."
-    exit 1
-fi
+# -- arguments
 # transform 1.22 to 122
 exercise=${1/./}
+shift
 
-# action:
+if [[ $# -gt 0 ]]; then
+    # construct a character regex
+    test_nums='['
+    while (("$#")); do
+        test_nums="$test_nums$1"
+        shift
+    done
+    test_nums="$test_nums]"
+else
+    test_nums='*'
+fi
+
+# -- action
 # compile the exercise
 file=`find "$src" -name "*$exercise.c"`
 echo "Found $file source file."
 
 exec="$target/$exercise.out"
-gcc -std=c99 "$file" -o "$exec"
+gcc -std=c99 -g "$file" -o "$exec"
 
 if [[ 0 -eq "$?" ]]; then
     echo "Compiled $file to $exec"
@@ -41,13 +56,14 @@ else
     exit 1
 fi
 
-# actual testing:
+# -- actual testing
 # run the program
+exec_cmd="$exec"
 exercise_tests="$tests/ex_$exercise"
-for input in `find "$exercise_tests" -name 'in_*'`; do
+for input in `find "$exercise_tests" -name "in_$test_nums"`; do
     number="${input##*in_}"
     output_file="$target/$number"
-    "$exec" < "$input" > "$output_file"
+    "$exec_cmd" < "$input" > "$output_file"
 
     expected_output="$tests/ex_$exercise/out_$number"
     if [[ ! -f "$expected_output" ]]; then
