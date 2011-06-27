@@ -1,0 +1,7 @@
+/* Multiline comment */
+int x = 1;
+/*
+   Some more
+   multiline comments
+* /
+*/

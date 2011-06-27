@@ -1,0 +1,11 @@
+// some line comment /* ... //
+int /* lol here */ x = 1; // yeah
+/*
+// asdgasgd
+   // asdg */ char c = 0;// some more comments
+/* multiline
+
+
+*/
+int y = 1;
+// the last comment

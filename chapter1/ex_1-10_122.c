@@ -17,8 +17,7 @@ int can_split(char buf[], int len, int c);
 
 /**
  * Splits the lines longer than `LINE_LENGTH` characters into separate lines
- * after the last non-blank character. If there are no non-blank characters in
- * line - splits the line with a hyphen (-) as the `line[LINE_LENGTH]` character.
+ * after the last non-blank character. Doesn't handle newlines in the input text.
  *
  * Example:
  *     LINE_LENGTH = 4
@@ -129,15 +128,10 @@ int next_line_break(char buf[], int len, int max) {
         return len;
     }
 
-    int last_blank = -1, last_char = -1, last_word_end = -1, i = 0;
+    int last_word_end = -1, i = 0;
     for (int i = 0; i < max; i++) {
-        if (is_blank(buf[i])) {
-            last_blank = i;
-            if (i > 0 && can_split(buf, i, buf[i])) {
-                last_word_end = i;
-            }
-        } else {
-            last_char = i;
+        if (is_blank(buf[i]) && i > 0 && can_split(buf, i, buf[i]) == TRUE) {
+            last_word_end = i;
         }
     }
 
