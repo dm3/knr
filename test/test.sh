@@ -42,7 +42,7 @@ fi
 
 # -- action
 # compile the exercise
-file=`find "$src" -name "*$exercise.c"`
+file=`find "$src" -name "*_$exercise.c"`
 echo "Found $file source file."
 
 exec="$target/$exercise.out"
@@ -60,6 +60,12 @@ fi
 # run the program
 exec_cmd="$exec"
 exercise_tests="$tests/ex_$exercise"
+if [[ ! -d "$exercise_tests" ]]; then
+    echo "No tests found for exercise '$exercise'. Running bare."
+    echo ""
+    $exec_cmd
+    exit 0;
+fi
 for input in `find "$exercise_tests" -name "in_$test_nums"`; do
     number="${input##*in_}"
     output_file="$target/$number"
