@@ -41,12 +41,14 @@ else
 fi
 
 # -- action
+# compile shared libraries (inefficient, should be using make)
+libs=`find "$src/lib" -name '*.c'`
 # compile the exercise
 file=`find "$src" -name "*_$exercise.c"`
 echo "Found $file source file."
 
 exec="$target/$exercise.out"
-gcc -W -Wall -ansi -pedantic -std=c99 -lm -g "$file" -o "$exec"
+gcc -W -Wall -ansi -pedantic -std=c99 -lm -g "$libs" "$file" -o "$exec"
 
 if [[ 0 -eq "$?" ]]; then
     echo "Compiled $file to $exec"

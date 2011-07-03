@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h> // atoi
+#include "../lib/bits.h"
 
 #define MAX 100
 
@@ -8,33 +8,6 @@
  * `p` must be greater or equal to `n`.
  */
 unsigned setbits(unsigned x, int p, int n, unsigned y);
-
-/**
- * Converts the array of 1/0 characters into an integer.
- */
-unsigned int bits_to_i(char s[]);
-
-/**
- * Prints out bit representation of a character followed by a newline.
- */
-void print_bits(unsigned char x);
-
-/**
- * Converts a given char `c` to a bit array representation.
- *
- * @param buf array of characters, must be at least 8 characters long
- */
-void c_to_bits(char buf[], unsigned char c);
-
-/**
- * Reads an integer from input string of decimals
- */
-unsigned int read_i();
-
-/**
- * Reads an integer from input string of bits
- */
-unsigned int read_bits_i();
 
 int main() {
     unsigned int x = read_bits_i();
@@ -71,47 +44,4 @@ unsigned setbits(unsigned x, int p, int n, unsigned y) {
     unsigned x_masked = x & x_mask;
 
     return x_masked | y_mask;
-}
-
-unsigned int bits_to_i(char s[]) {
-    unsigned int result = 0;
-    for (int i = 0; s[i] == '0' || s[i] == '1'; i++) {
-        result = (result << 1) | (s[i] - '0');
-    }
-    return result;
-}
-
-void c_to_bits(char buf[], unsigned char c) {
-    unsigned char mask = 1;
-    for (int i = 0; i < 8; i++) {
-        int masked = (c >> i) & mask;
-        buf[7 - i] = masked + '0';
-    }
-}
-
-void print_bits(unsigned char x) {
-    char buf[9];
-    c_to_bits(buf, x);
-    buf[8] = '\0';
-    printf("%s\n", buf);
-}
-
-unsigned int read_i() {
-    char buf[MAX];
-    int c, i = 0;
-    while (i < MAX - 1 && (c = getchar()) >= '0' && c <= '9') {
-        buf[i++] = c;
-    }
-    buf[i] = '\0';
-    return atoi(buf);
-}
-
-unsigned int read_bits_i() {
-    char buf[MAX], c;
-    int i = 0;
-    while (i < MAX - 1 && ((c = getchar()) == '0' || c == '1')) {
-        buf[i++] = c;
-    }
-    buf[i] = '\0';
-    return bits_to_i(buf);
 }
