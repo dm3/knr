@@ -2,7 +2,7 @@
 
 root="$HOME/projects/c/knr"
 tests="$root/test"
-src="$root/chapter1"
+src="$root/src"
 target="$root/target"
 
 # -- preconditions
