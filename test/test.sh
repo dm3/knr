@@ -46,7 +46,7 @@ file=`find "$src" -name "*_$exercise.c"`
 echo "Found $file source file."
 
 exec="$target/$exercise.out"
-gcc -std=c99 -g "$file" -o "$exec"
+gcc -W -Wall -ansi -pedantic -std=c99 -lm -g "$file" -o "$exec"
 
 if [[ 0 -eq "$?" ]]; then
     echo "Compiled $file to $exec"
