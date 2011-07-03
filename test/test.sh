@@ -141,6 +141,7 @@ fi
 # -- actual testing
 has_tests "$exercise"
 if [[ 0 -eq $? ]]; then
+    echo "Running tests..."
     run_tests "$exercise" "$exec" "$test_nums"
 else
     echo "No tests found for exercise '$exercise'. Running bare."
