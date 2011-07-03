@@ -18,7 +18,7 @@ int main() {
     // set the 3 bits at position 4 to 101, e.g.
     // setbits([00000000], 4, 3, [00000101]) = [00001010]
     unsigned result = setbits(x, pos, num, other);
-    print_bits(result);
+    print_bits(result, 8);
 }
 
 unsigned setbits(unsigned x, int p, int n, unsigned y) {

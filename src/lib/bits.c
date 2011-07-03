@@ -12,19 +12,26 @@ unsigned int bits_to_i(char s[]) {
     return result;
 }
 
-void c_to_bits(char buf[], unsigned char c) {
-    unsigned char mask = 1;
-    for (int i = 0; i < 8; i++) {
+void to_bits(char buf[], unsigned c) {
+    unsigned int mask = 1;
+    int size = sizeof(c) * 8;
+    for (int i = 0; i < size; i++) {
         int masked = (c >> i) & mask;
-        buf[7 - i] = masked + '0';
+        buf[size - 1 - i] = masked + '0';
     }
 }
 
-void print_bits(unsigned char x) {
-    char buf[9];
-    c_to_bits(buf, x);
-    buf[8] = '\0';
-    printf("%s\n", buf);
+void print_bits(unsigned int x, unsigned int n) {
+    unsigned int size = sizeof(x) * 8 + 1;
+    char buf[size];
+    to_bits(buf, x);
+    buf[size - 1] = '\0';
+
+    if (n < size) {
+        printf("%s\n", buf + (size - 1 - n));
+    } else {
+        printf("%s\n", buf);
+    }
 }
 
 unsigned int read_i() {

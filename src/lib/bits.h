@@ -7,9 +7,11 @@
 unsigned int bits_to_i(char s[]);
 
 /**
- * Prints out bit representation of a character followed by a newline.
+ * Prints out bit representation of a variable followed by a newline.
+ * @param x variable to print out
+ * @param n number of bits from the right side to print
  */
-void print_bits(unsigned char x);
+void print_bits(unsigned int x, unsigned int n);
 
 /**
  * Converts a given char `c` to a bit array representation.

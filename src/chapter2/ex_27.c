@@ -14,7 +14,7 @@ int main() {
     int num = read_i();
 
     unsigned result = invert(x, pos, num);
-    print_bits(result);
+    print_bits(result, 8);
 }
 
 unsigned invert(unsigned x, int p, int n) {
