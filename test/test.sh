@@ -23,7 +23,7 @@ function compile() {
     source=$2
     executable=$3
 
-    gcc -W -Wall -ansi -pedantic -std=c99 -lm -g "$libs" "$source" -o "$executable"
+    gcc -W -Wall -ansi -pedantic -std=c99 -lm -g $libs "$source" -o "$executable"
 }
 
 function compile_exercise() {
