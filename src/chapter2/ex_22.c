@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#define MAX 10
+
 /**
  * Loop equivalent to
  *
@@ -9,8 +11,8 @@
  * without && or || operators.
  */
 int main() {
-    int lim = 10, i = 0;
-    int s[lim], c;
+    int i = 0, c;
+    char s[MAX];
 
     /*
      * Invariants:
@@ -19,11 +21,9 @@ int main() {
      *    before the newline or EOF is encountered.
      * 3. Loop goes up until `lim - 1`
      */
-    while (i < lim - 1) {
-        c = getchar();
-        if (c != '\n' && c != EOF) {
-            s[i] = c;
-        }
-        i++;
+    while (i < MAX - 1 && ((c = getchar()) != '\n' && c != EOF)) {
+        s[i++] = c;
     }
+    s[i] = '\0';
+    printf("%s\n", s);
 }

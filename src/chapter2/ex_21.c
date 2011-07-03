@@ -105,7 +105,7 @@ int main() {
     printf("Range of unsigned char: [%d; %d]\n", 0, calc_max_uchar());
     printf("Range of unsigned short: [%d; %hu]\n", 0, calc_max_ushort());
     printf("Range of unsigned int: [%d; %u]\n", 0, calc_max_uint());
-    printf("Range of unsigned long: [%d; %d]\n", 0, calc_max_ulong());
+    printf("Range of unsigned long: [%d; %lu]\n", 0, calc_max_ulong());
     printf("Range of signed char: [%d; %d]\n", calc_min_char(), calc_max_char());
     printf("Range of signed short: [%hd; %hd]\n", calc_min_short(), calc_max_short());
     printf("Range of signed int: [%d; %d]\n", calc_min_int(), calc_max_int());
